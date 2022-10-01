@@ -138,7 +138,7 @@ export default function Header() {
       { name: "About Us", link: "/about", activeIndex: 3 },
       { name: "Contact Us", link: "/contact", activeIndex: 4 },
     ],
-    []
+    [anchorEl]
   );
   useEffect(() => {
     [...menuOptions, ...routes].forEach((route) => {
@@ -233,7 +233,7 @@ export default function Header() {
         onClick={() => setOpenDrawer(!openDrawer)}
         disableRipple
       >
-        <MenuIcon className={ classes.drawerIcon } />
+        <MenuIcon className={classes.drawerIcon} />
       </IconButton>
     </>
   );
