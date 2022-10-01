@@ -4,6 +4,7 @@ import theme from "./ui/theme";
 import Header from "./ui/header";
 
 function App() {
+  
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -13,7 +14,10 @@ function App() {
           <Route path="/services" element={<div>services</div>} />
           <Route path="/contact" element={<div>contact</div>} />
           <Route path="/about" element={<div>about</div>} />
-          <Route path="/revilution" element={<div>revilution</div>} />
+          <Route path="/revolution" element={<div>revolution</div>} />
+          <Route path="/customsoftware" element={<div>customsoftware</div>} />
+          <Route path="/mobileapps" element={<div>mobileapps</div>} />
+          <Route path="/websites" element={<div>websites</div>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
