@@ -2,9 +2,9 @@ import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import theme from "./ui/theme";
 import Header from "./ui/header";
+import { Footer } from "./ui/footer";
 
 function App() {
-  
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -19,6 +19,7 @@ function App() {
           <Route path="/mobileapps" element={<div>mobileapps</div>} />
           <Route path="/websites" element={<div>websites</div>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

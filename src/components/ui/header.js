@@ -9,6 +9,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {
   Button,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Menu,
   MenuItem,
   SwipeableDrawer,
@@ -21,12 +24,24 @@ const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2.5em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1.25em",
+    },
   },
   logo: {
-    height: "7em",
+    height: "8em",
+    [theme.breakpoints.down("md")]: {
+      height: "7em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "5.5em",
+    },
   },
   logoContainer: {
-    padding: 0,
+    padding: "0!important",
     "&:hover": {
       backgroundColor: "transparent",
     },
@@ -41,10 +56,13 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     ...theme.typography.estimate,
-    borderRadius: "50px",
-    marginLeft: "50px",
-    marginRight: "25px",
-    height: "45px",
+    borderRadius: "50px!important",
+    marginLeft: "50px!important",
+    marginRight: "25px!important",
+    height: "45px!important",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   menu: {
     backgroundColor: theme.palette.common.blue,
@@ -59,12 +77,26 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   drawerIcon: {
-    height: "50px",
-    width: "50px",
+    height: "50px!important",
+    width: "50px!important",
   },
   drawerIconContainer: {
-    marginLeft: "auto",
+    marginLeft: "auto!important",
     "&:hover": {},
+  },
+  drawer: {
+    backgroundColor: `${theme.palette.common.blue}!important`,
+  },
+  drawerItem: {
+    ...theme.typography.tab,
+    color: "white",
+    opacity: 0.7,
+  },
+  drawerItemEstimate: {
+    backgroundColor: theme.palette.common.orange,
+  },
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
   },
 }));
 
@@ -226,7 +258,47 @@ export default function Header() {
         onOpen={() => setOpenDrawer(true)}
         classes={{ paper: classes.drawer }}
       >
-        button
+        <div className={classes.toolbarMargin} />
+        <List disablePadding>
+          {routes.map((route) => (
+            <ListItem
+              divider
+              key={`${route}${route.activeIndex}`}
+              button
+              component={Link}
+              to={route.link}
+              selected={value === route.activeIndex}
+              classes={{ selected: classes.drawerItemSelected }}
+              onClick={() => {
+                setOpenDrawer(false);
+                setValue(route.activeIndex);
+              }}
+            >
+              <ListItemText className={classes.drawerItem} disableTypography>
+                {route.name}
+              </ListItemText>
+            </ListItem>
+          ))}
+          <ListItem
+            onClick={() => {
+              setOpenDrawer(false);
+              setValue(5);
+            }}
+            divider
+            button
+            component={Link}
+            classes={{
+              root: classes.drawerItemEstimate,
+              selected: classes.drawerItemSelected,
+            }}
+            to="/estimate"
+            selected={value === 5}
+          >
+            <ListItemText className={classes.drawerItem} disableTypography>
+              Free Estimate
+            </ListItemText>
+          </ListItem>
+        </List>
       </SwipeableDrawer>
       <IconButton
         className={classes.drawerIconContainer}
@@ -239,7 +311,7 @@ export default function Header() {
   );
   return (
     <>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="fixed" className={classes.appbar} color="primary">
         <Toolbar disableGutters={true}>
           <Button
             component={Link}
