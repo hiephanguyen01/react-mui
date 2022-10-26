@@ -89,23 +89,26 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerItem: {
     ...theme.typography.tab,
-    color: "white",
+    color: "white!important",
     opacity: 0.7,
   },
   drawerItemEstimate: {
     backgroundColor: theme.palette.common.orange,
   },
   appbar: {
-    zIndex: theme.zIndex.modal + 1,
+    zIndex: `${theme.zIndex.modal + 1}!important`,
   },
 }));
 
-export default function Header() {
-  const [value, setValue] = useState(0);
+export default function Header({
+  value,
+  setValue,
+  selectedIndex,
+  setSelectedIndex,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -190,7 +193,7 @@ export default function Header() {
           break;
       }
     });
-  }, [value, menuOptions, selectedIndex, routes]);
+  }, [value, menuOptions, selectedIndex, routes, setValue, setSelectedIndex]);
   const tabs = (
     <>
       <Tabs
